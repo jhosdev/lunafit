@@ -10,7 +10,7 @@ aws-sdk-cognitoidentityprovider = { workspace = true }
 
 # Lambda runtime
 lambda_runtime = { workspace = true }
-lambda_web = { workspace = true }
+lambda-web  = { workspace = true }
 
 # Serialization
 serde = { workspace = true }

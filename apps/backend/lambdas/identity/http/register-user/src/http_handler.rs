@@ -1,7 +1,7 @@
-use lambda_http::{Body, Error, Request, RequestExt, Response};
+use lambda_http::{Body, Error, Request, Response};
 use serde::{Deserialize, Serialize};
 use aws_sdk_cognitoidentityprovider::Client as CognitoClient;
-use aws_config::load_from_env;
+use aws_config::load_defaults;
 use tracing::{info, error};
 use uuid::Uuid;
 
@@ -54,7 +54,7 @@ pub(crate) async fn function_handler(event: Request) -> Result<Response<Body>, E
     }
 
     // Initialize AWS Cognito client
-    let config = load_from_env().await;
+    let config = load_defaults(aws_config::BehaviorVersion::latest()).await;
     let cognito_client = CognitoClient::new(&config);
 
     // Get user pool ID from environment
@@ -178,7 +178,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_invalid_request_body() {
-        let request = Request::default();
+        let request = Request::new(Body::Empty);
         let response = function_handler(request).await.unwrap();
         assert_eq!(response.status(), 400);
     }
@@ -186,9 +186,7 @@ mod tests {
     #[tokio::test]
     async fn test_missing_required_fields() {
         let body = r#"{"email": "", "password": "", "tenant_id": ""}"#;
-        let request = Request::builder()
-            .body(body.into())
-            .unwrap();
+        let request = Request::new(body.into());
         
         let response = function_handler(request).await.unwrap();
         assert_eq!(response.status(), 400);
@@ -197,9 +195,7 @@ mod tests {
     #[tokio::test]
     async fn test_invalid_email_format() {
         let body = r#"{"email": "invalid-email", "password": "password123", "tenant_id": "tenant1"}"#;
-        let request = Request::builder()
-            .body(body.into())
-            .unwrap();
+        let request = Request::new(body.into());
         
         let response = function_handler(request).await.unwrap();
         assert_eq!(response.status(), 400);
@@ -208,9 +204,7 @@ mod tests {
     #[tokio::test]
     async fn test_password_too_short() {
         let body = r#"{"email": "test@example.com", "password": "short", "tenant_id": "tenant1"}"#;
-        let request = Request::builder()
-            .body(body.into())
-            .unwrap();
+        let request = Request::new(body.into());
         
         let response = function_handler(request).await.unwrap();
         assert_eq!(response.status(), 400);

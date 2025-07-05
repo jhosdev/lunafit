@@ -15,3 +15,8 @@ variable "project_name" {
   type        = string
   default     = "lunafit"
 }
+
+variable "account_id" {
+  description = "AWS Account ID"
+  type        = string
+}

@@ -69,9 +69,11 @@ resource "aws_cognito_user_pool_client" "lunafit_user_pool_client" {
   # Auth flows
   explicit_auth_flows = [
     "ADMIN_NO_SRP_AUTH",
-    "USER_PASSWORD_AUTH",
-    "ALLOW_REFRESH_TOKEN_AUTH"
+    "USER_PASSWORD_AUTH"
   ]
+  
+  # Enable refresh token auth separately
+  generate_secret = false
 
   # Token validity
   access_token_validity  = 60    # 1 hour

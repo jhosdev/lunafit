@@ -18,7 +18,7 @@ aws-lambda-events = "0.11.0"
 
 # Lambda runtime
 lambda_runtime = "0.8.0"
-lambda_web = "0.2.0"
+lambda-web = "0.2.0"
 
 # Serialization
 serde = { version = "1.0", features = ["derive"] }
@@ -39,11 +39,4 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 uuid = { version = "1.0", features = ["v4"] }
 chrono = { version = "0.4", features = ["serde"] }
 
-[package]
-name = "lunafit-backend"
-version = "0.1.0"
-edition = "2021"
-
-[lib]
-# This will be empty since we're using a workspace
-path = "src/lib.rs"
+# No package section needed for workspace root

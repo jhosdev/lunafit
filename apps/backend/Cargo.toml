@@ -3,11 +3,11 @@ resolver = "2"
 members = [
     # Identity Domain - HTTP Lambdas
     "lambdas/identity/http/register-user",
-    "lambdas/identity/http/confirm-user", 
-    "lambdas/identity/http/authenticate-user",
+    #"lambdas/identity/http/confirm-user", 
+    #"lambdas/identity/http/authenticate-user",
     
     # Identity Domain - Cognito Triggers
-    "lambdas/identity/cognito/pre-signup",
+    #"lambdas/identity/cognito/pre-signup",
 ]
 
 [workspace.dependencies]

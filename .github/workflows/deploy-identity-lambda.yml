@@ -16,6 +16,9 @@ on:
       - 'infra/cognito.tf'
       - 'infra/api-gateway.tf'
 
+  workflow_dispatch:
+    
+
 env:
   AWS_REGION: us-east-1
   RUST_VERSION: 1.75.0

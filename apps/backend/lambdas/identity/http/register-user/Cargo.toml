@@ -1,0 +1,34 @@
+[package]
+name = "register-user"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# AWS SDK
+aws-config = { workspace = true }
+aws-sdk-cognitoidentityprovider = { workspace = true }
+
+# Lambda runtime
+lambda_runtime = { workspace = true }
+lambda_web = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Utilities
+uuid = { workspace = true }
+
+# HTTP handling
+lambda_http = "0.13.0"

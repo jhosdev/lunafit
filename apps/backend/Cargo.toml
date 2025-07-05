@@ -1,0 +1,49 @@
+[workspace]
+resolver = "2"
+members = [
+    # Identity Domain - HTTP Lambdas
+    "lambdas/identity/http/register-user",
+    "lambdas/identity/http/confirm-user", 
+    "lambdas/identity/http/authenticate-user",
+    
+    # Identity Domain - Cognito Triggers
+    "lambdas/identity/cognito/pre-signup",
+]
+
+[workspace.dependencies]
+# AWS SDK
+aws-config = "1.1.0"
+aws-sdk-cognitoidentityprovider = "1.12.0"
+aws-lambda-events = "0.11.0"
+
+# Lambda runtime
+lambda_runtime = "0.8.0"
+lambda_web = "0.2.0"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Async runtime
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+uuid = { version = "1.0", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[package]
+name = "lunafit-backend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+# This will be empty since we're using a workspace
+path = "src/lib.rs"
